@@ -114,23 +114,12 @@ Sample code:
 
 This extension has also a pair [Clear Filters Gridview](http://www.yiiframework.com/extension/clear-filters-gridview "http://www.yiiframework.com/extension/clear-filters-gridview")
 
+remember, filters, cgridview, gridview, store, reload, controller, model, behavior, interface, widget, stick, scenario
+
 Change Log 
 -----------------
 
-**June 3, 2011**
-
-- Added support for 'scenarios'. You can now tell your model to use remember scenario when the same model is used on multiple views. 
-
-**March 7, 2011**
-
-- Added support for 'defaults' and 'defaultStickOnClear'. You can now tell your model to set default filters for your form using this extension, and optionally stick or absolutely clear them on clearFilters.
-
-**January 31, 2011**
-
-- Initial release.
-
-remember, filters, cgridview, gridview, store, reload, controller, model, behavior, interface, widget, stick, scenario
-
+[CHANGELOG.md](http://github.com/pentium10/yii-remember-filters-gridview/blob/master/CHANGELOG.md)
 
 Contributing
 ------------
