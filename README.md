@@ -22,8 +22,8 @@ Donate
 Resources
 ---------------
 
+- [Extension page](http://www.yiiframework.com/extension/remember-filters-gridview/)
 - [Report a bug](http://github.com/pentium10/yii-remember-filters-gridview/issues "Report a bug")
-- [Developer](http://www.yiiframework.com/forum/index.php?/user/8824-pentium10/ "Developer")
 - [Forum](http://www.yiiframework.com/forum/index.php?/topic/15847-extension-remember-filters-gridview/ "Forum")
 - [Clear Filters Gridview extension](http://www.yiiframework.com/extension/clear-filters-gridview "http://www.yiiframework.com/extension/clear-filters-gridview")
 
