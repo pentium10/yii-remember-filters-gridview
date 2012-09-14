@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Yii-remember-filters-gridview by pentium10</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Yii-remember-filters-gridview</h1>
+        <p class="header">This yii extension helps you to remember/store filter values of GridViews during navigation, filters will stick.</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/pentium10/yii-remember-filters-gridview/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/pentium10/yii-remember-filters-gridview/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/pentium10/yii-remember-filters-gridview">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/pentium10">pentium10</a></p>
+
+
+      </header>
+      <section>
+        <h1>yii-remember-filters-gridview</h1>
+
+<p>The ERememberFiltersBehavior Yii extension adds up some functionality to the default possibilites of CActiveRecord/Model implementation.</p>
+
+<p>It will detect the <strong>search</strong> scenario and it will save the filters from the GridView. This comes handy when you need to <strong>remember them between navigation</strong> during page changes. For lot of navigation and heavy filtering, this functionality can be activated by just a couple of lines.</p>
+
+<p>It supports <strong>default filter values</strong> and <strong>remember scenarios</strong> also. For example if you want to show only eg: Active Products, you can setup the default filter using this extension. Or if you have the same modal on different views, you can set different scenarios to remember state separated from each other. See the optional params under Advanced Functionalities and Scenarios section. </p>
+
+<p><img src="http://www.yiiframework.com/forum/index.php?app=core&amp;module=attach&amp;section=attach&amp;attach_id=1217" alt="Please login to see the Demo image!" title="Demo"></p>
+
+<h2>Requirements</h2>
+
+<ul>
+<li>Yii 1.1</li>
+</ul><h2>Donate</h2>
+
+<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=K9TM6HR8JQ4Z8" title="Donate">Click here to donate</a></p>
+
+<h2>Resources</h2>
+
+<ul>
+<li><a href="http://www.yiiframework.com/extension/remember-filters-gridview/">Extension page</a></li>
+<li><a href="http://github.com/pentium10/yii-remember-filters-gridview/issues" title="Report a bug">Report a bug</a></li>
+<li><a href="http://www.yiiframework.com/forum/index.php?/topic/15847-extension-remember-filters-gridview/" title="Forum">Forum</a></li>
+<li><a href="http://www.yiiframework.com/extension/clear-filters-gridview" title="http://www.yiiframework.com/extension/clear-filters-gridview">Clear Filters Gridview extension</a></li>
+</ul><h2>Usage</h2>
+
+<h2>Step 1</h2>
+
+<p>To use this extension, just copy this file to your components/ directory, add 'import' =&gt; 'application.components.ERememberFiltersBehavior', [...] to your config/main.php and paste the following code to your behaviors() method of your model</p>
+
+<div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span> <span class="p">{</span>
+       <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+           <span class="s1">'ERememberFiltersBehavior'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+               <span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'application.components.ERememberFiltersBehavior'</span><span class="p">,</span>
+               <span class="s1">'defaults'</span><span class="o">=&gt;</span><span class="k">array</span><span class="p">(),</span>           <span class="cm">/* optional line */</span>
+               <span class="s1">'defaultStickOnClear'</span><span class="o">=&gt;</span><span class="k">false</span>   <span class="cm">/* optional line */</span>
+           <span class="p">),</span>
+       <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>Step 2</h2>
+
+<p><strong>Your actionAdmin() must not use unsetAttributes() as this was moved to the extension.</strong></p>
+
+<p>With this extension the actionAdmin instead of the classic</p>
+
+<div class="highlight"><pre>        <span class="k">public</span> <span class="k">function</span> <span class="nf">actionAdmin</span><span class="p">()</span>
+        <span class="p">{</span>
+                <span class="nv">$model</span><span class="o">=</span><span class="k">new</span> <span class="nx">Company</span><span class="p">(</span><span class="s1">'search'</span><span class="p">);</span>
+                <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">unsetAttributes</span><span class="p">();</span>  <span class="c1">// clear any default values</span>
+                <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">'Company'</span><span class="p">]))</span>
+                        <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">=</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">'Company'</span><span class="p">];</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">,</span><span class="k">array</span><span class="p">(</span>
+                        <span class="s1">'model'</span><span class="o">=&gt;</span><span class="nv">$model</span><span class="p">,</span>
+                <span class="p">));</span>
+        <span class="p">}</span>
+</pre></div>
+
+<p>can be as simple as:</p>
+
+<div class="highlight"><pre>        <span class="k">public</span> <span class="k">function</span> <span class="nf">actionAdmin</span><span class="p">()</span>
+        <span class="p">{</span>
+                <span class="nv">$model</span><span class="o">=</span><span class="k">new</span> <span class="nx">Company</span><span class="p">(</span><span class="s1">'search'</span><span class="p">);</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">,</span><span class="k">array</span><span class="p">(</span>
+                        <span class="s1">'model'</span><span class="o">=&gt;</span><span class="nv">$model</span><span class="p">,</span>
+                <span class="p">));</span>
+        <span class="p">}</span>
+</pre></div>
+
+<h2>Advanced Functionalities</h2>
+
+<p><em>(if you use these functionalities please Donate)</em></p>
+
+<ul>
+<li><p><strong>'defaults'</strong> is a key value pair array, that will hold the defaults for your filters. 
+For example when you initially want to display <code>active products</code>, you set to <code>array('status'=&gt;'1')</code>. 
+You can of course put multiple default values in the array.</p></li>
+<li><p><strong>'defaultStickOnClear'=&gt;true</strong> can be used, if you want the default values to be put back when the user clears the filters
+The default set is <code>false</code> so if the user clears the filters, also the defaults are cleared out, the user will get an absolutely clean filter form. When <code>true</code>, if the form is cleared, he will get a form with defaults values.</p></li>
+</ul><h2>Scenarios</h2>
+
+<p><em>(if you use these functionalities please Donate)</em></p>
+
+<p>You can use <code>scenarios</code> to remember the filters on multiple states of the same model. This is helpful when you use the same model on different views and you want to remember the state separated from each other.<br>
+Known limitations: the views must be in different actions (not on the same view)  </p>
+
+<p>To set a scenario add the setRememberScenario call after the instantiation<br>
+Sample code:  </p>
+
+<div class="highlight"><pre>        <span class="k">public</span> <span class="k">function</span> <span class="nf">actionAdmin</span><span class="p">()</span>
+        <span class="p">{</span>
+                <span class="nv">$model</span><span class="o">=</span><span class="k">new</span> <span class="nx">Company</span><span class="p">(</span><span class="s1">'search'</span><span class="p">);</span>
+                <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">setRememberScenario</span><span class="p">(</span><span class="s1">'scene1'</span><span class="p">);</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">'admin'</span><span class="p">,</span><span class="k">array</span><span class="p">(</span>
+                        <span class="s1">'model'</span><span class="o">=&gt;</span><span class="nv">$model</span><span class="p">,</span>
+                <span class="p">));</span>
+        <span class="p">}</span>
+</pre></div>
+
+<p>This extension has also a pair <a href="http://www.yiiframework.com/extension/clear-filters-gridview" title="http://www.yiiframework.com/extension/clear-filters-gridview">Clear Filters Gridview</a></p>
+
+<p>remember, filters, cgridview, gridview, store, reload, controller, model, behavior, interface, widget, stick, scenario</p>
+
+<h2>Change Log </h2>
+
+<p><a href="http://github.com/pentium10/yii-remember-filters-gridview/blob/master/CHANGELOG.md">CHANGELOG.md</a></p>
+
+<h2>Contributing</h2>
+
+<ol>
+<li>Fork it.</li>
+<li>Create a branch (<code>git checkout -b my_enhancement_name</code>)</li>
+<li>Commit your changes (<code>git commit -am "Added Sorting"</code>)</li>
+<li>Push to the branch (<code>git push origin my_enhancement_name</code>)</li>
+<li>Open a <a href="http://github.com/pentium10/yii-remember-filters-gridview/pulls">Pull Request</a>
+</li>
+<li>Enjoy a refreshing Diet Coke and wait</li>
+</ol>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
