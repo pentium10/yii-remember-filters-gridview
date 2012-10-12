@@ -169,7 +169,7 @@ class ERememberFiltersBehavior extends CActiveRecordBehavior {
     
     
     private function doReadSave() {
-        if ($this->owner->scenario == 'search') {
+        if ($this->owner->scenario == 'search' || $this->owner->scenario == $this->rememberScenario) {
             $this->owner->unsetAttributes();
             if (isset($_GET[get_class($this->owner)])) {
                 $this->owner->attributes = $_GET[get_class($this->owner)];
