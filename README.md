@@ -7,7 +7,7 @@ It will detect the **search** scenario and it will save the filters from the Gri
 
 It supports **default filter values** and **remember scenarios** also. For example if you want to show only eg: Active Products, you can setup the default filter using this extension. Or if you have the same modal on different views, you can set different scenarios to remember state separated from each other. See the optional params under Advanced Functionalities and Scenarios section. 
 
-![Please login to see the Demo image!](http://www.yiiframework.com/forum/index.php?app=core&module=attach&section=attach&attach_id=1217 "Demo")
+![Please login to see the Demo image!](https://raw.github.com/pentium10/yii-remember-filters-gridview/master/res/remember_filters_10.png "Demo")
 
 Requirements
 --------------------
@@ -22,7 +22,7 @@ Donate
 Resources
 ---------------
 
-- [Extension page](http://www.yiiframework.com/extension/remember-filters-gridview/)
+- **[Extension page](http://www.yiiframework.com/extension/remember-filters-gridview/) (don't forget to cast your support vote)**
 - [Report a bug](http://github.com/pentium10/yii-remember-filters-gridview/issues "Report a bug")
 - [Forum](http://www.yiiframework.com/forum/index.php?/topic/15847-extension-remember-filters-gridview/ "Forum")
 - [Clear Filters Gridview extension](http://www.yiiframework.com/extension/clear-filters-gridview "http://www.yiiframework.com/extension/clear-filters-gridview")
