@@ -169,16 +169,41 @@ class ERememberFiltersBehavior extends CActiveRecordBehavior {
     
     
     private function doReadSave() {
-        if ($this->owner->scenario == 'search' || $this->owner->scenario == $this->rememberScenario) {
-            $this->owner->unsetAttributes();
-            if (isset($_GET[get_class($this->owner)])) {
-                $this->owner->attributes = $_GET[get_class($this->owner)];
-                $this->saveSearchValues();
-            } else {
-                $this->readSearchValues();
-            }
+      if ($this->owner->scenario == 'search' || $this->owner->scenario == $this->rememberScenario ) {
+        $this->owner->unsetAttributes();
+
+        // store also sorting order
+        $key = get_class($this->owner).'_sort';
+        if(!empty($_GET[$key])){
+          Yii::app()->user->setState($this->getStatePrefix() . 'sort', $_GET[$key]);
+        }else {
+          $val = Yii::app()->user->getState($this->getStatePrefix() . 'sort');
+          if(!empty($val))
+            $_GET[$key] = $val;
         }
+
+        // store active page in page
+        $key = get_class($this->owner).'_page';
+        if(!empty($_GET[$key])){
+          Yii::app()->user->setState($this->getStatePrefix() . 'page', $_GET[$key]);
+        }elseif (!empty($_GET["ajax"])){
+          // page 1 passes no page number, just an ajax flag
+          Yii::app()->user->setState($this->getStatePrefix() . 'page', 1);
+        }else{
+          $val = Yii::app()->user->getState($this->getStatePrefix() . 'page');
+          if(!empty($val))
+            $_GET[$key] = $val;
+        }
+
+        if (isset($_GET[get_class($this->owner)])) {
+          $this->owner->attributes = $_GET[get_class($this->owner)];
+          $this->saveSearchValues();
+        } else {
+          $this->readSearchValues();
+        }
+      }
     }
+
     
     public function afterConstruct($event) {
         $this->doReadSave();
