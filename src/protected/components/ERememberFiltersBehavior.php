@@ -16,7 +16,7 @@
 *
 * @author Pentium10 http://www.yiiframework.com/forum/index.php?/user/8824-pentium10/
 * @link http://www.yiiframework.com/
-* @version 1.2
+* @version 1.2.1
 
 * Copyright (c) 2011, Pentium10
 * All rights reserved.
@@ -61,7 +61,11 @@
 *
 *
 * CHANGELOG
-*
+* 
+* 2013-11-01
+* v1.2.1 
+* Clear state if class $attribute is not set as.
+* 
 * 2011-06-02
 * v1.2 
 * Added support for 'scenarios'. 
@@ -155,13 +159,9 @@ class ERememberFiltersBehavior extends CActiveRecordBehavior {
     }
 
     private function saveSearchValues() {
-
-        $modelName = get_class($this->owner);
         $attributes = $this->owner->getSafeAttributeNames();
         foreach ($attributes as $attribute) {
             if (isset($this->owner->$attribute)) {
-                //echo var_export($attributes,true);
-                //exit;
                 Yii::app()->user->setState($this->getStatePrefix() . $attribute, $this->owner->$attribute);
             }
         }
