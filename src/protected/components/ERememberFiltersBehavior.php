@@ -163,6 +163,8 @@ class ERememberFiltersBehavior extends CActiveRecordBehavior {
         foreach ($attributes as $attribute) {
             if (isset($this->owner->$attribute)) {
                 Yii::app()->user->setState($this->getStatePrefix() . $attribute, $this->owner->$attribute);
+            } else {
+                Yii::app()->user->setState($this->getStatePrefix() . $attribute, 1, 1);
             }
         }
     }
@@ -224,7 +226,7 @@ class ERememberFiltersBehavior extends CActiveRecordBehavior {
             }
         }
         if ($this->defaultStickOnClear) {
-            Yii::app()->user->setState($modelName . __CLASS__. 'defaultsSet', 1,1);
+            Yii::app()->user->setState($modelName . __CLASS__. 'defaultsSet', 1, 1);
         }
         return $this->owner;
     }
