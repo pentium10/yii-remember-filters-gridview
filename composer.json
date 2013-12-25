@@ -6,5 +6,8 @@
     "license": "BSD-2-Clause",
     "support": {
         "issues": "https://github.com/pentium10/yii-remember-filters-gridview/issues"
+    },
+	"autoload": {
+        "classmap": ["components/ERememberFiltersBehavior.php"]
     }
 }
