@@ -64,7 +64,7 @@
 * 
 * 2013-11-01
 * v1.2.1 
-* Clear state if class $attribute is not set as.
+* Clear state if class $attribute is not set.
 * 
 * 2011-06-02
 * v1.2 

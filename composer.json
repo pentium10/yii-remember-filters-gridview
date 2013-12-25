@@ -1,0 +1,10 @@
+{
+    "name": "pentium10/remember-filters-gridview",
+    "description": "This Yii extension helps you to remember filter values of GridViews during navigation, filters will stick.",
+    "keywords": ["yii", "remember", "filters", "cgridview", "gridview", "store", "reload", "controller", "model", "behavior", "interface", "widget", "stick", "scenario"],
+    "type": "library",
+    "license": "BSD-2-Clause",
+    "support": {
+        "issues": "https://github.com/pentium10/yii-remember-filters-gridview/issues"
+    }
+}
