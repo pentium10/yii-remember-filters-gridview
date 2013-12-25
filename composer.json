@@ -8,7 +8,7 @@
         "issues": "https://github.com/pentium10/yii-remember-filters-gridview/issues"
     },
 	"require": {
-        "php": ">=5.3.0",
+        "php": ">=5.1.0",
         "yiisoft/yii": "*"
     },
 	"autoload": {
