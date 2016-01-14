@@ -37,7 +37,8 @@
 *            'ERememberFiltersBehavior' => array(
 *                'class' => 'application.components.ERememberFiltersBehavior',
 *                'defaults'=>array(),
-*                'defaultStickOnClear'=>false 
+*                'defaultStickOnClear'=>false,
+*                'scenarioName'=>'search',
 *            ),
 *        );
 * }
@@ -59,6 +60,11 @@
 * $model=new Persons('search');
 * $model->setRememberScenario('scene1');
 *
+* 'scenarioName'=>'search' is a name of a search function in your model. Change this, if you use other function name,
+* i.e. if your code looks like:
+* 
+* $model=new Persons('searchSort'));
+* 
 *
 * CHANGELOG
 * 
@@ -101,6 +107,13 @@ class ERememberFiltersBehavior extends CActiveRecordBehavior {
      * @var boolean
      */
     public $defaultStickOnClear=false;
+    /**
+     * Default search scenario name
+     * 
+     * @var string
+     */
+    public $scenarioName='search';
+    
 	/**
 	* Holds a custom stateId key 
 	*
@@ -171,7 +184,7 @@ class ERememberFiltersBehavior extends CActiveRecordBehavior {
     
     
     private function doReadSave() {
-      if ($this->owner->scenario == 'search' || $this->owner->scenario == $this->rememberScenario ) {
+      if ($this->owner->scenario == $this->scenarioName || $this->owner->scenario == $this->rememberScenario ) {
         $this->owner->unsetAttributes();
 
         // store also sorting order
